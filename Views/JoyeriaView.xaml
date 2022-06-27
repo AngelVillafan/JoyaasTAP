@@ -1,0 +1,96 @@
+﻿<Window x:Class="JoyaasTAP.Views.JoyeriaView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:JoyaasTAP.Views"
+        xmlns:vm="clr-namespace:JoyaasTAP.ViewModels"
+        mc:Ignorable="d"
+        Title="Tiffany &amp; Co." Height="750" Width="1080" Background="White">
+    <Window.DataContext>
+        <vm:JoyasViewModel></vm:JoyasViewModel>
+    </Window.DataContext>
+    <Grid>
+        <DockPanel>
+            <Border DockPanel.Dock="Top"
+                    Style="{StaticResource borderarriba}">
+                <DockPanel>
+                    <Image Source="https://1000marcas.net/wp-content/uploads/2021/05/Tiffany-Co-Logo.png"
+                           Height="100"
+                           Margin="20,0,0,0"
+                           RenderOptions.BitmapScalingMode="Fant"
+                           DockPanel.Dock="Left"></Image>
+                    <WrapPanel DockPanel.Dock="Right"
+                               Height="auto"
+                               VerticalAlignment="Center"
+                               Margin="0,0,20,0">
+                        <Button Command="{Binding CambiarVistaCommand}"
+                                CommandParameter="Agregar">&#10133;</Button>
+                        <Button Command="{Binding EliminarCommand}">&#x2796;</Button>
+                    </WrapPanel>
+                    <TextBlock></TextBlock>
+                </DockPanel>
+            </Border>
+            <Border DockPanel.Dock="Bottom"
+                    Style="{StaticResource borderabajo}">
+                <Grid VerticalAlignment="Center"
+                      HorizontalAlignment="Center">
+                    <StackPanel>
+                        <Image Source="../Assets/gift.png"
+                               Width="30"></Image>
+                        <TextBlock Foreground="White"
+                                   FontWeight="DemiBold"
+                                   FontSize="16"
+                                   Margin="0"
+                                   HorizontalAlignment="Center">Su compra de Tiffany viene envuelta en nuestro icónico paquete Blue Box.</TextBlock>
+                        <TextBlock Text="{Binding Error}"
+                                   Margin="0"
+                                   Style="{StaticResource error}"></TextBlock>
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <Grid Margin="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <ListBox ItemsSource="{Binding Joyeria}"
+                         SelectedItem="{Binding LaJoya}"
+                         BorderBrush="Black"
+                         BorderThickness="2"
+                         Width="200">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="Black"
+                                    BorderThickness="2"
+                                    Width="185">
+                                <TextBlock Text="{Binding Nombre}"></TextBlock>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <ContentControl Grid.Column="1">
+                    <ContentControl.Resources>
+                        <local:AgregarView x:Key="Agregar"></local:AgregarView>
+                        <local:DetallesView x:Key="Detalles"></local:DetallesView>
+                    </ContentControl.Resources>
+                    <ContentControl.Style>
+                        <Style TargetType="ContentControl">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Vista}" Value="Ver">
+                                    <Setter Property="Content" Value="{StaticResource Detalles}"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Vista}" Value="Agregar">
+                                    <Setter Property="Content" Value="{StaticResource Agregar}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ContentControl.Style>
+                </ContentControl>
+            </Grid>
+            
+            
+        </DockPanel>
+    </Grid>
+</Window>

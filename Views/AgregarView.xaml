@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="JoyaasTAP.Views.AgregarView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:JoyaasTAP.Views"
+             xmlns:vm="clr-namespace:JoyaasTAP.ViewModels"
+             d:DataContext="{d:DesignInstance Type=vm:JoyasViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="462" d:DesignWidth="800">
+    <Grid Background="White">
+        <Border BorderBrush="Black"
+                BorderThickness="2"
+                Background="White"
+                Margin="20,0">
+
+            <DockPanel>
+                <TextBlock DockPanel.Dock="Bottom"
+                           Text="{Binding Error}"
+                           Style="{StaticResource error}"></TextBlock>
+
+                <WrapPanel DockPanel.Dock="Bottom"
+                           HorizontalAlignment="Center">
+                    <Button Command="{Binding CancelarCommand}"
+                            Style="{StaticResource botonadd}">&#x2715;</Button>
+                    <Button Command="{Binding AgregarCommand}"
+                            Style="{StaticResource botonadd}">&#x2714;</Button>
+                </WrapPanel>
+                <StackPanel Margin="10">
+                    <TextBlock>Añadir joya</TextBlock>
+
+                    <TextBlock>Nombre</TextBlock>
+                    <TextBox Text="{Binding LaJoya.Nombre}"></TextBox>
+
+                    <TextBlock>Origen</TextBlock>
+                    <TextBox Text="{Binding LaJoya.Origen}"></TextBox>
+
+                    <TextBlock>Peso (en gramos)</TextBlock>
+                    <TextBox Text="{Binding LaJoya.Peso}"></TextBox>
+
+                    <TextBlock>Tipo de producto</TextBlock>
+                    <ComboBox ItemsSource="{Binding LaJoya.Tipo}"
+                              x:Name="combo"
+                      SelectedItem="{Binding LaJoya.Tipo}"></ComboBox>
+
+                    <TextBlock>Descripcion</TextBlock>
+                    <TextBox Text="{Binding LaJoya.Descripcion}"></TextBox>
+
+                    <TextBlock>Imagen</TextBlock>
+                    <TextBox Text="{Binding LaJoya.Foto}"></TextBox>
+
+
+
+
+
+
+                </StackPanel>
+            </DockPanel>
+            
+        </Border>
+    </Grid>
+</UserControl>
